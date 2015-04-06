@@ -1,0 +1,12 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
+target 'BRDateUtils', :exclusive => true do
+  pod "BRDateUtils", :path => "../"
+end
+
+target 'Tests', :exclusive => true do
+  pod "BRDateUtils", :path => "../"
+
+  pod 'Specta'
+  pod 'Expecta'
+end
