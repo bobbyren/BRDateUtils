@@ -10,18 +10,16 @@
 Pod::Spec.new do |s|
   s.name             = "BRDateUtils"
   s.version          = "0.1.0"
-  s.summary          = "A short description of BRDateUtils."
+  s.summary          = "Simple functions to make handing and formatting dates easier"
   s.description      = <<-DESC
-                       An optional longer description of BRDateUtils
-
-                       * Markdown format.
-                       * Don't worry about the indent, we strip it!
+                        * Uses NSCalendar to get week/month/year
+                        * Uses various date formatters
                        DESC
-  s.homepage         = "https://github.com/<GITHUB_USERNAME>/BRDateUtils"
+  s.homepage         = "https://github.com/bobbyren/BRDateUtils"
   # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
   s.license          = 'MIT'
   s.author           = { "mitrenegade" => "bobbyren@gmail.com" }
-  s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/BRDateUtils.git", :tag => s.version.to_s }
+  s.source           = { :git => "https://github.com/bobbyren/BRDateUtils.git", :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.platform     = :ios, '7.0'
