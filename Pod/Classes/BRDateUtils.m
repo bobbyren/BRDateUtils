@@ -104,4 +104,40 @@ static NSDateFormatter *hourMinAMPMFormatter;
     NSDateFormatter *formatter = [self hourMinAMPMFormatter];
     return [formatter stringFromDate:date];
 }
+
+#pragma mark Time of day 
++(NSDate *)beginningOfDate:(NSDate *)date GMT:(BOOL)gmt {
+    // warning: DST
+    NSCalendar *gregorian = [[NSCalendar alloc]
+                             initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *components =
+    [gregorian components:(NSYearCalendarUnit | NSMonthCalendarUnit |
+                           NSDayCalendarUnit) fromDate:date];
+    
+    if (gmt)
+        [gregorian setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+    else
+        [gregorian setTimeZone:[NSTimeZone localTimeZone]];
+    [components setHour:0];
+    [components setMinute:0];
+    [components setSecond:0];
+    return [gregorian dateFromComponents:components];
+}
+
++(NSDate *)beginningOfHour:(NSDate *)date GMT:(BOOL)gmt {
+    // warning: DST
+    NSCalendar *gregorian = [[NSCalendar alloc]
+                             initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *components =
+    [gregorian components:(NSYearCalendarUnit | NSMonthCalendarUnit |
+                           NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit) fromDate:date];
+    if (gmt)
+        [gregorian setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+    else
+        [gregorian setTimeZone:[NSTimeZone localTimeZone]];
+    [components setMinute:0];
+    [components setSecond:0];
+    return [gregorian dateFromComponents:components];
+}
+
 @end

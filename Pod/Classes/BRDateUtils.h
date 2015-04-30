@@ -21,4 +21,8 @@
 +(NSString *)yearMonthDayForDate:(NSDate *)date;
 +(NSString *)simpleTimeForDate:(NSDate *)date;
 
+#pragma mark Time of day
++(NSDate *)beginningOfDate:(NSDate *)date GMT:(BOOL)gmt;
++(NSDate *)beginningOfHour:(NSDate *)date GMT:(BOOL)gmt;
+
 @end
