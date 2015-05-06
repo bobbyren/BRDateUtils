@@ -25,4 +25,7 @@
 +(NSDate *)beginningOfDate:(NSDate *)date GMT:(BOOL)gmt;
 +(NSDate *)beginningOfHour:(NSDate *)date GMT:(BOOL)gmt;
 
+#pragma mark Weekday
++(NSString*)weekdayStringFromDate:(NSDate*)date GMT:(BOOL)gmt;
++(NSString*)weekdayStringFromDate:(NSDate*)date arrayStartingWithMonday:(NSArray *)dayStrings GMT:(BOOL)gmt;
 @end

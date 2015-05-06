@@ -140,4 +140,24 @@ static NSDateFormatter *hourMinAMPMFormatter;
     return [gregorian dateFromComponents:components];
 }
 
+#pragma mark Weekday
++(NSString *)weekdayStringFromDate:(NSDate *)date GMT:(BOOL)gmt {
+    return [self weekdayStringFromDate:date arrayStartingWithMonday:@[@"Monday", @"Tuesday", @"Wednesday", @"Thursday", @"Friday", @"Saturday", @"Sunday"] GMT:gmt];
+}
+
++(NSString*)weekdayStringFromDate:(NSDate*)date arrayStartingWithMonday:(NSArray *)dayStrings GMT:(BOOL)gmt {
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    [gregorian setTimeZone:[NSTimeZone localTimeZone]];
+    if (!gmt)
+        [gregorian setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+    NSDateComponents *comps = [gregorian components:(NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit | NSWeekdayCalendarUnit) fromDate:date];
+    NSLog(@"Date: %@ weekday: %lu", date, comps.weekday);
+    NSInteger weekday = [comps weekday];
+    // for some reason, weekday: 1 = sunday, 2 = mon, etc, so we have to create a string that wraps around and has 0 = saturday
+    NSMutableArray *allStrings = [dayStrings mutableCopy];
+    [allStrings insertObject:dayStrings[dayStrings.count-1] atIndex:0]; // insert sunday at beginning
+    [allStrings insertObject:dayStrings[dayStrings.count-2] atIndex:0]; // insert saturday at beginning
+    return [allStrings objectAtIndex:weekday]; // weekday ranges from 1 to 7
+}
+
 @end
